@@ -3,3 +3,44 @@
 #include <ctime>
 
 using namespace std;
+class Task {
+private:
+    string title;
+    string description;
+    string date;
+    string time;
+
+public:
+    // Constructors
+    Task() : title(""), description(""), date(""), time("") {}
+    Task(const string& title, const string& description, const string& date, const string& time)
+        : title(title), description(description), date(date), time(time) {}
+
+    // Function to display task details
+    void display() const {
+        cout << "Title: " << title << endl;
+        cout << "Description: " << description << endl;
+        cout << "Date: " << date << endl;
+        cout << "Time: " << time << endl;
+    }
+
+    // Getter methods
+    string getTitle() const { return title; }
+    string getDate() const { return date; }
+    string getTime() const { return time; }
+
+    // Function to validate the time format
+    bool validateTimeFormat(const string& timeStr) const {
+        // Time format: HH:MM
+        if (timeStr.length() != 5)
+            return false;
+        if (timeStr[2] != ':')
+            return false;
+        if (!isdigit(timeStr[0]) || !isdigit(timeStr[1]) || !isdigit(timeStr[3]) || !isdigit(timeStr[4]))
+            return false;
+        if (stoi(timeStr.substr(0, 2)) > 23 || stoi(timeStr.substr(3, 2)) > 59)
+            return false;
+        return true;
+    }
+};
+
